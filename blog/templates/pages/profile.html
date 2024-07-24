@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="main-content profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="text-center m-5 img-edit">
+                    <form class="img-form" action="{% url 'profile' %}?action=image" enctype="multipart/form-data"
+                        method="post">
+                        {% csrf_token %}
+
+                        <img class="rounded rounded-circle w-100" src="{{ user.profile_image }}">
+                        <label for="id_profile_image">
+                            <div>
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </div>
+                        </label>
+                        {{ image_form.profile_image }}
+                    </form>
+                </div>
+                <hr>
+                <div class="row justify-content-around">
+                    <div>
+                        Following:
+                        {% if user.user_followed.count > 0 %}
+                        {{ user.user_followed.count }}
+                        {% else %}
+                        0
+                        {% endif %}
+                    </div>
+                    <div>
+                        Followers:
+                        {% if user.user_followers.count > 0 %}
+                        {{ user.user_followers.count }}
+                        {% else %}
+                        0
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex flex-column">
+                    <a class="btn btn-outline-secondary m-2" href="{% url 'my_blogs' %}">My blogs</a>
+                    <a class="btn btn-outline-secondary m-2" href="{% url 'add_post' %}">Add blog</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 p-3">
+                {% include "components/messages.html" %}
+                <h2 class="mb-3">Personal info: </h2>
+                <form action="{% url 'profile' %}?action=info" method="post">
+                    {% csrf_token %}
+
+                    {% if profile_form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ profile_form.non_field_errors }}
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="id_username">Username: </label>
+                        <input type="text" class="form-control" , placeholder="Enter your username"
+                            value="{{ user.username }}" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_email">Email address: </label>
+                        <input type="email" class="form-control" , placeholder="Enter your email"
+                            value="{{ user.email }}" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_first_name">First name: </label>
+                        {{ profile_form.first_name }}
+
+                        {% if profile_form.first_name.errors %}
+                        <div class="text-danger">
+                            {{ profile_form.first_name.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_last_name">Last name: </label>
+                        {{ profile_form.last_name }}
+
+                        {% if profile_form.last_name.errors %}
+                        <div class="text-danger">
+                            {{ profile_form.last_name.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-sec">Save</button>
+                </form>
+
+                <hr>
+
+                <h2 class="mb-3">Change password: </h2>
+                <form action="{% url 'profile' %}?action=password" method="post">
+                    {% csrf_token %}
+
+                    {% if password_form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ password_form.non_field_errors }}
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="id_password">Current password: </label>
+                        {{ password_form.password }}
+
+                        {% if password_form.password.errors %}
+                        <div class="text-danger">
+                            {{ password_form.password.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_new_password">New password: </label>
+                        {{ password_form.new_password }}
+
+                        {% if password_form.new_password.errors %}
+                        <div class="text-danger">
+                            {{ password_form.new_password.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_conf_password">Confirm password: </label>
+                        {{ password_form.conf_password }}
+
+                        {% if password_form.conf_password.errors %}
+                        <div class="text-danger">
+                            {{ password_form.conf_password.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-sec">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static 'blog/js/profile-img.js' %}"></script>
+
+{% endblock %}

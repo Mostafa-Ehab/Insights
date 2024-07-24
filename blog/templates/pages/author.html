@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="main-content profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="text-center m-5 img-edit">
+                    <img class="rounded rounded-circle w-100" src="{{ author.profile_image.url }}">
+                </div>
+                <hr>
+                <div class="d-flex justify-content-center p-2">
+                    Posts: <span>{{ author.author_blogs.count }}</span>
+                </div>
+                <div class="d-flex justify-content-center p-2">
+                    Following:
+                    {% if author.user_followed.count > 0 %}
+                    {{ author.user_followed.count }}
+                    {% else %}
+                    0
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-center p-2">
+                    Followers:
+                    {% if author.user_followers.count > 0 %}
+                    {{ author.user_followers.count }}
+                    {% else %}
+                    0
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-center p-2">
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'follow' user_id=author.pk %}">
+                        {% csrf_token %}
+                        {% if auther in user.user_followed %}
+                        <button type="submit" id="form-submit" class="btn btn-sec">Follow</button>
+                        {% else %}
+                        <button type="submit" id="form-submit" class="btn btn-sec-outline">Following</button>
+                        {% endif %}
+                    </form>
+                    {% else %}
+                    <a href="#" class="link link-primary">Login to follow</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-md-8 p-3">
+                {% include "components/messages.html" %}
+                <h2>{{ author.username }}</h2>
+                {% for blog in author.author_blogs.all %}
+                <div class="blog-post">
+                    <a href="{% url 'post' slug=blog.slug %}" class="d-flex ">
+                        <div class="col-4">
+                            <img class="w-100" src="{{ blog.banner.url }}">
+                        </div>
+                        <div class="col-8">
+                            <h6>{{ blog.title }}</h6>
+                            <p>
+                                {{ blog.content | truncatewords:20 | striptags | escape }}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="d-flex justify-content-center">
+                    <p>This author has no posts</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

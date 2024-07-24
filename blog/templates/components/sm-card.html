@@ -1,0 +1,40 @@
+<div class="col-lg-6">
+    <div class="blog-post blog-card">
+        <div class="blog-thumb">
+            <img src="{{ blog.banner.url }}" alt="">
+        </div>
+        <div class="down-content">
+            <span>{{ blog.category }}</span>
+            <a href="{% url 'post' slug=blog.slug %}">
+                <h4>{{ blog.title }}</h4>
+            </a>
+            <ul class="post-info">
+                <li><a href="{% url 'author' slug=blog.author.slug %}">{{ blog.author }}</a></li>
+                <li><a href="#">{{ blog.formatted_date }}</a></li>
+                <li><a href="#">{{ blog.blog_comments.all.count }} Comments</a></li>
+            </ul>
+            <p>{{ blog.content | truncatewords:30 | striptags | escape }}</p>
+            <div class="post-options">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="post-tags">
+                            <li><i class="fa fa-tags"></i></li>
+                            {% if blog.tags.all %}
+
+                            {% for tag in blog.tags.all|slice:3 %}
+                            <li>
+                                <a href="{% url 'tag' slug=tag.slug %}">{{ tag }}</a>
+                                {% if not forloop.last %}, {% endif %}
+                            </li>
+                            {% endfor %}
+
+                            {% else %}
+                            <li>None</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

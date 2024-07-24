@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% include "components/banner.html" %}
+
+{% load static %}
+
+<section class="blog-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="all-blog-posts">
+                    <div class="row">
+                        {% for blog in blogs|slice:20 %}
+                        {% include 'components/lg-card.html' %}
+                        {% endfor %}
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-center">
+                                <a href="{% url 'blogs' %}" class="btn btn-sec-outline">View All Posts</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                {% include 'components/sidebar.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="login-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Login:</h1>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+
+                    {% if login_form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ login_form.non_field_errors }}
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="id_username">Username: </label>
+                        {{ login_form.username }}
+
+                        {% if login_form.username.errors %}
+                        <div class="text-danger">
+                            {{ login_form.username.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password">Password: </label>
+                        {{ login_form.password }}
+
+                        {% if login_form.password.errors %}
+                        <div class="text-danger">
+                            {{ login_form.password.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-sec">Login</button>
+
+                    <p class="text-center">
+                        Dont't have account? <a href="{% url 'register' %}"> Singup </a>
+                    </p>
+                </form>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

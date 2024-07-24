@@ -1,0 +1,36 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 footer-section text-center">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <h2><em>In</em>sights</h2>
+                </a>
+            </div>
+            <div class="col-12 col-md-4 footer-section">
+                <ul class="list-group list-group-flush">
+                    {% for category in all_categories|slice:6 %}
+                    <li class="list-group-item footer-list-item">
+                        <a href="{% url 'category' slug=category.slug %}" class="text text-light">
+                            {{ category.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-12 col-md-4 ">
+                <ul class="list-group list-group-flush">
+                    {% for tag in all_tags|slice:6 %}
+                    <li class="list-group-item footer-list-item">
+                        <a href="{% url 'tag' slug=tag.slug %}" class="text text-light">
+                            {{ tag.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="text-center">
+            <p class="p-2"> Copyright &copy; Mostafa Ehab. 2022-2024. All rights reserved.</p>
+        </div>
+    </div>
+</footer>

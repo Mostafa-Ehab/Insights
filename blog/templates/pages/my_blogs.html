@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="main-content blogs-grid">
+    <div class="container">
+        {% include "components/messages.html" %}
+        <div class="d-flex justify-content-between p-5">
+            <h4>Add blog: </h4>
+            <a href="{% url 'add_post' %}" class="btn btn-sec-outline">
+                New
+            </a>
+        </div>
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-md-6 col-lg-4 my-2">
+                <div class="card">
+                    <a href="{% url 'post' slug=blog.slug %}">
+                        <img class="card-img-top" src="{{ blog.banner.url }}" alt="Card image cap">
+                    </a>
+                    <div class="card-body d-flex align-items-center p-3">
+                        <div class="blog-title">
+                            {{ blog.title }}
+                        </div>
+
+                        <a href="{% url 'edit_post' slug=blog.slug %}" class="btn btn-link ml-auto text-success">
+                            <i class=" fa-solid fa-pen-to-square"></i>
+                        </a>
+
+                        <button type="button" class="btn btn-link text-danger" data-toggle="modal"
+                            data-target="#blog-{{ blog.slug }}">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="blog-{{ blog.slug }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm delete</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this blog?
+                            <p> {{ blog.title }} </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                            <form action="{% url 'delete_post' slug=blog.slug %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger">delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if blogs %}
+        <div class="row justify-content-center pt-3">
+            {% include "components/pagination.html" %}
+        </div>
+        {% else %}
+        <div class="text-center"> You don't have any posts <a href="{% url 'add_post' %}">Add one?</a> </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

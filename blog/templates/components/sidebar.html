@@ -1,0 +1,71 @@
+<div class="sidebar">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="sidebar-item recent-posts">
+                {% if related_posts %}
+                <div class="sidebar-heading">
+                    <h2>Related Posts</h2>
+                </div>
+                <div class="content">
+                    <ul>
+                        {% for post in related_posts|slice:3 %}
+                        <li>
+                            <a href="{% url 'post' slug=post.slug %}">
+                                <h5>{{ post.title }}</h5>
+                                <span>{{ post.formatted_date }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% else %}
+                <div class="sidebar-heading">
+                    <h2>Recent Posts</h2>
+                </div>
+                <div class="content">
+                    <ul>
+                        {% for post in recent_posts|slice:3 %}
+                        <li>
+                            <a href="{% url 'post' slug=post.slug %}">
+                                <h5>{{ post.title }}</h5>
+                                <span>{{ post.formatted_date }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="sidebar-item categories">
+                <div class="sidebar-heading">
+                    <h2>Categories</h2>
+                </div>
+                <div class="content">
+                    <ul>
+                        {% for category in all_categories %}
+                        <li>
+                            <a href="{% url 'category' slug=category.slug %}">- {{ category }} </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="sidebar-item tags">
+                <div class="sidebar-heading">
+                    <h2>Tag Clouds</h2>
+                </div>
+                <div class="content">
+                    <ul>
+                        {% for tag in all_tags|slice:15 %}
+                        <li><a href="{% url 'tag' slug=tag.slug %}">{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

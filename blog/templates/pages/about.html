@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Page Content -->
+<!-- Banner Starts Here -->
+<div class="heading-page header-text">
+  <section class="page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-content">
+            <!-- <h4>Post Details</h4> -->
+            <h2>About us</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Banner Ends Here -->
+
+<section class="blog-posts">
+  <div class="container">
+    {% include "components/messages.html" %}
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="blog-post">
+              <div class="down-content">
+                <div class="post-content">
+                  <h4>Welcome to Insights</h4>
+                  <p>
+                    At Insights, we believe in the power of knowledge and the boundless potential of artificial
+                    intelligence to generate meaningful content. Our platform is dedicated to providing you with
+                    high-quality, AI-generated articles on a diverse range of topics.
+                  </p>
+
+                  <h4>Our Mission</h4>
+                  <p>
+                    Our mission is to harness the capabilities of AI to deliver insightful and engaging content that
+                    informs, educates, and inspires our readers. Whether you're looking to learn something new, gain a
+                    different perspective, or simply enjoy a good read, Insights is here to meet your needs.
+                  </p>
+
+                  <h4>What We Offer</h4>
+                  <ul>
+                    <li>
+                      <p>
+                        <strong>Diverse Topics:</strong> Our AI-generated articles cover a wide spectrum of subjects,
+                        from
+                        technology and science to travel, lifestyle, and more. We aim to cater to the varied interests
+                        of
+                        our
+                        readers.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong>Quality Content:</strong> Each article is crafted using advanced AI algorithms designed
+                        to
+                        produce well-researched and coherent content that adds value to your reading experience.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong>Regular Updates:</strong> Stay tuned for regular updates as we continually add new
+                        articles
+                        and explore different themes to keep our content fresh and relevant.
+                      </p>
+                    </li>
+                  </ul>
+
+                  <h4>Our Vision</h4>
+                  <p>
+                    We envision a future where AI and human creativity work hand in hand to revolutionize the way we
+                    consume information. By leveraging AI, we strive to push the boundaries of content creation and
+                    explore
+                    new frontiers in digital publishing.
+                  </p>
+
+                  <h4>Join Us on This Journey</h4>
+                  <p>
+                    We invite you to explore our collection of articles and join us on this exciting journey. Whether
+                    you're a curious learner, a passionate enthusiast, or simply someone who loves to read, there's
+                    something here for everyone.
+                  </p>
+
+                  <p>
+                    Thank you for visiting Insights. We hope you enjoy your time here and find our articles both
+                    informative and enjoyable.
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        {% include 'components/sidebar.html' %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

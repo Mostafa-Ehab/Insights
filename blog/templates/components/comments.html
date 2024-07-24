@@ -1,0 +1,93 @@
+<div class="col-lg-12">
+    <div class="sidebar-item comments">
+        <div class="sidebar-heading">
+            <h2>{{ post.blog_comments.all.count }} comments</h2>
+        </div>
+        <div class="content">
+            <ul>
+                {% for comment in post.blog_comments.all %}
+                <li class="comment">
+                    <div class="author-thumb">
+                        <img src="{{ comment.user.profile_image.url }}" alt="">
+                    </div>
+                    <div class="right-content">
+                        <h4>{{ comment.user }}<span>{{ comment.formatted_date }}</span></h4>
+                        <p>{{ comment.text }}</p>
+
+                        <ul class="replied">
+                            {% for reply in comment.comment_reply.all %}
+                            <li>
+                                <div class="author-thumb">
+                                    <img src="{{ reply.user.profile_image.url }}" alt="">
+                                </div>
+                                <div class="right-content">
+                                    <h4>{{ reply.user }}<span>{{ reply.formatted_date }}</span>
+                                    </h4>
+                                    <p>{{ reply.text }}</p>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <!-- Start Reply Form -->
+                        <div class="submit-reply">
+                            <form action="{% url 'add_reply' comment_id=comment.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        {{ reply_form.reply }}
+                                    </div>
+                                    <div class="col-lg-12">
+                                        {% if user.is_authenticated %}
+                                        <button type="submit" id="form-submit" class="btn btn-sec">
+                                            Submit
+                                        </button>
+                                        {% else %}
+                                        <a href="#" class="link link-primary">
+                                            Login to reply
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End Reply Form -->
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="sidebar-item submit-comment">
+        <div class="sidebar-heading">
+            <h2>Your comment</h2>
+        </div>
+        <div class="content">
+            <form id="comment" action="{% url 'post' slug=post.slug %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% if comment_form.comment.errors %}
+                        <div class="alert alert-danger">
+                            {{ comment_form.comment.errors }}
+                        </div>
+                        {% endif %}
+                        {{ comment_form.comment }}
+                    </div>
+                    <div class="col-lg-12">
+                        <fieldset>
+                            {% if user.is_authenticated %}
+                            <button type="submit" id="form-submit" class="btn btn-sec">Submit</button>
+                            {% else %}
+                            <a href="#" class="link link-primary">Login to comment</a>
+                            {% endif %}
+                        </fieldset>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

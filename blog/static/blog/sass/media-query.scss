@@ -1,0 +1,120 @@
+@media (max-width: 1250px) {
+    .owl-banner .owl-nav .owl-prev {
+        left: 0px;
+    }
+
+    .owl-banner .owl-nav .owl-next {
+        right: 0px;
+    }
+
+    .owl-banner .owl-nav button span {
+        width: 35px;
+    }
+
+    .owl-banner .item .item-content .meta-category span {
+        font-size: 16px;
+    }
+
+    .owl-banner .item .item-content h4 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .owl-banner .owl-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar .navbar-brand {
+        position: absolute;
+        left: 30px;
+        top: 25px;
+    }
+
+    .background-header .navbar-brand,
+    .background-header .navbar-toggler {
+        top: 15px;
+    }
+
+    .navbar .navbar-brand {
+        width: auto;
+    }
+
+    .navbar:after {
+        display: none;
+    }
+
+    #navbarResponsive {
+        z-index: 99999;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .navbar-nav .nav-item {
+        border-bottom: 1px solid #eee;
+    }
+
+    .navbar .navbar-nav .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    .navbar .navbar-nav a.nav-link {
+        padding: 15px 0px;
+        color: #1e1e1e !important;
+    }
+
+    .navbar .navbar-nav .nav-link:hover,
+    .navbar .navbar-nav .active>.nav-link,
+    .navbar .navbar-nav .nav-link.active,
+    .navbar .navbar-nav .nav-link.show,
+    .navbar .navbar-nav .show>.nav-link {
+        color: var(--sec-color) !important;
+        border-bottom: none !important;
+        padding-bottom: 15px;
+    }
+
+    .owl-banner .item .item-content .meta-category span {
+        font-size: 18px;
+    }
+
+    .owl-banner .item .item-content {
+        text-align: center;
+        width: 80%;
+        left: 50%;
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+    }
+
+    .owl-banner .item .item-content h4 {
+        font-size: 24px;
+    }
+
+    .call-to-action {
+        text-align: center;
+    }
+
+    .call-to-action .main-content .main-button {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .sidebar {
+        margin-left: 0px;
+        margin-top: 60px;
+        padding-top: 60px;
+        border-top: 3px solid #f7f7f7;
+    }
+
+    .contact-us .contact-information {
+        margin-left: 0px;
+        margin-top: 60px;
+    }
+}
