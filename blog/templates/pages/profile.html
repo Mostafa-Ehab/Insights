@@ -13,7 +13,7 @@
                         method="post">
                         {% csrf_token %}
 
-                        <img class="rounded rounded-circle w-100" src="{{ user.profile_image }}">
+                        <img class="rounded rounded-circle w-100" src="{{ user.profile_image.url }}">
                         <label for="id_profile_image">
                             <div>
                                 <i class="fa-regular fa-pen-to-square"></i>

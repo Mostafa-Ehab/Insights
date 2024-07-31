@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, JsonResponse, Http404
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -145,10 +145,10 @@ def search(request: HttpRequest):
             "title": f"Insights | {search} | Mostafa Ehab"
         })
 
-    # raise Http404()
-    return render(request, "errors/not-found.html", {
-        "title": f"Insights | Page not found | Mostafa Ehab"
-    })
+    raise Http404()
+    # return render(request, "errors/not-found.html", {
+    #     "title": f"Insights | Page not found | Mostafa Ehab"
+    # })
 
 
 def author_profile(request: HttpRequest, slug: str):
