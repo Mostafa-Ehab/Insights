@@ -79,7 +79,7 @@ def post_view(request: HttpRequest, slug: str):
 
 def category(request: HttpRequest, slug: str):
     category = get_object_or_404(Category, slug=slug)
-    queryset = category.category_blogs.all()
+    queryset = category.category_blogs.all().order_by("-created_date")
     # tags = Tag.objects.order_by("-created_date")
 
     paginator = Paginator(queryset, 20)
@@ -104,7 +104,7 @@ def category(request: HttpRequest, slug: str):
 
 def tag(request: HttpRequest, slug: str):
     tag = get_object_or_404(Tag, slug=slug)
-    queryset = tag.tag_blogs.all()
+    queryset = tag.tag_blogs.all().order_by("-created_date")
     # tags = Tag.objects.order_by("-created_date")
 
     paginator = Paginator(queryset, 20)
