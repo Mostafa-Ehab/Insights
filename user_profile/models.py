@@ -43,7 +43,7 @@ class User(AbstractUser):
         if not check_image_size(self.profile_image.path,400, 400):
             new_path = get_random_image_name(self.profile_image.path)
             resize_img(self.profile_image.path, new_path, 400, 400)
-            self.profile_image.name = f"profile_image/{new_path.split('\\')[-1]}"
+            self.profile_image.name = f"profile_image/{new_path.split('/')[-1]}"
 
     def generate_slug(self, username):
         self.slug = slugify(username)

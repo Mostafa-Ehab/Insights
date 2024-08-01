@@ -40,7 +40,7 @@
                                     <h4>{{ post.title }}</h4>
                                 </a>
                                 <ul class="post-info">
-                                    <li><a href="{% url 'author' slug=post.author.slug %}">{{ post.author }}</a></li>
+                                    <li><a href="{% url '' slug=blog.author.slug %}">{{ post.author }}</a></li>
                                     <li><a href="#">{{ post.formatted_date }}</a></li>
                                     <li><a href="#">{{ post.blog_comments.all.count }} Comments</a></li>
                                 </ul>

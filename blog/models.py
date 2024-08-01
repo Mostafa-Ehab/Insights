@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.utils.text import slugify
 from user_profile.models import User
 from django.utils.html import format_html
+from os import path
 
 from utils import *
 
@@ -91,7 +92,7 @@ class Blog(models.Model):
         if not check_image_size(self.banner.path, 1200, 630):
             new_path = get_random_image_name(self.banner.path)
             resize_img(self.banner.path, new_path, 1200, 630)
-            self.banner.name = f"blog_banner/{new_path.split('\\')[-1]}"
+            self.banner.name = f"blog_banner/{new_path.split('/')[-1]}"
     
     def generate_slug(self, title):
         self.slug = slugify(title)

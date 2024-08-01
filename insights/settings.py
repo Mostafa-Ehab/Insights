@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p_&x9ca%che4thq8=d1m9^q=fsic7p3@y7d%%6w1+k+_rzpnjw'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'insights.mostafa-ehab.com']
 
+SECURE_SSL_REDIRECT = True
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_TRUSTED_ORIGINS = ['https://insights.mostafa-ehab.com']
+
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -123,6 +134,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = 'static/'
 
+MEDIA_URL = "media/"
 MEDIA_ROOT = "media/"
 
 # Default primary key field type

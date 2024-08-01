@@ -27,4 +27,7 @@ urlpatterns = [
     path("", include("user_profile.urls"))
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = "blog.views.not_found"
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
