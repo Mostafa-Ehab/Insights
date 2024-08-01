@@ -92,7 +92,7 @@ class Blog(models.Model):
         if not check_image_size(self.banner.path, 1200, 630):
             new_path = get_random_image_name(self.banner.path)
             resize_img(self.banner.path, new_path, 1200, 630)
-            self.banner.name = f"blog_banner/{new_path.split('/')[-1]}"
+            self.banner.name = path.join("blog_banner", path.split(new_path)[1])
     
     def generate_slug(self, title):
         self.slug = slugify(title)

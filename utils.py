@@ -61,10 +61,9 @@ def check_image_size(main_path, x, y):
 
 def get_random_image_name(old_path):
     path_list = path.split(old_path)
-    old_name = path_list[-1]
-    ext = old_name.split(".")[-1]
-
-    return "/".join(list(path_list[:-1]) + [f"{get_random_sid()}.{ext}"])
+    ext = path.splitext(old_path)[1]
+    
+    return path.join(path_list[0], f'{get_random_sid()}{ext}')
 
 def get_random_sid(length=12):
     characters = string.ascii_lowercase + string.digits
