@@ -31,7 +31,6 @@ class User(AbstractUser):
 
     slug = models.SlugField(blank=True, unique=True)
 
-    # USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["email"]
 
     objects = CustomUserManager()
@@ -40,10 +39,9 @@ class User(AbstractUser):
         return self.username
 
     def process_image(self):
-        if not check_image_size(self.profile_image.path,400, 400):
-            new_path = get_random_image_name(self.profile_image.path)
-            resize_img(self.profile_image.path, new_path, 400, 400)
-            self.profile_image.name = path.join("profile_image", path.split(new_path)[1])
+        new_path = get_random_image_name(self.profile_image.path)
+        resize_img(self.profile_image.path, new_path, 400, 400)
+        self.profile_image.name = path.join("profile_image", path.split(new_path)[1])
 
     def generate_slug(self, username):
         self.slug = slugify(username)
@@ -55,9 +53,10 @@ class User(AbstractUser):
         if not self.pk:
             self.generate_slug(self.username)
         super().save(*args, **kwargs)
-        if self.profile_image:
+        
+        if self.profile_image and not check_image_size(self.profile_image.path,400, 400):
             self.process_image()
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
 
 class Follow(models.Model):
     followed = models.ForeignKey(

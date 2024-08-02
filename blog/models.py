@@ -83,20 +83,18 @@ class Blog(models.Model):
 
     @admin.display(description="Preview")
     def show_banner(self):
-        return format_html('<img src="/%s" width="150" height="150" />' % (self.banner))
+        return format_html('<img src="/%s" width="150" height="150" />' % (self.banner.url))
     
     def formatted_date(self):
         return datetime_format(self.created_date)
     
     def process_image(self):
-        if not check_image_size(self.banner.path, 1200, 630):
-            new_path = get_random_image_name(self.banner.path)
-            resize_img(self.banner.path, new_path, 1200, 630)
-            self.banner.name = path.join("blog_banner", path.split(new_path)[1])
+        new_path = get_random_image_name(self.banner.path)
+        resize_img(self.banner.path, new_path, 1200, 630)
+        self.banner.name = path.join("blog_banner", path.split(new_path)[1])
     
     def generate_slug(self, title):
         self.slug = slugify(title)
-        print(self.slug)
 
         if Blog.objects.filter(slug=self.slug).exists():
             self.generate_slug(f"{self.title} {get_random_slug_suffix()}")
@@ -109,8 +107,9 @@ class Blog(models.Model):
             self.generate_slug(self.title)
             
         super().save(*args, **kwargs)
-        self.process_image()
-        super().save(*args, **kwargs)
+        if not check_image_size(self.banner.path, 1200, 630):
+            self.process_image()
+            super().save(*args, **kwargs)
     
 
 class Comment(models.Model):
