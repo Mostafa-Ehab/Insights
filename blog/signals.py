@@ -6,7 +6,7 @@ from user_profile.models import Follow, User
 from notification.models import Notification
 
 
-@receiver(post_save, sender=Blog)
+@receiver(post_save, sender=Blog, weak=False)
 def send_notification_to_follower_when_blog_created(instance, created,  *args, **kwargs):
     if created:
         for follower in instance.author.user_followers.all():
@@ -18,7 +18,7 @@ def send_notification_to_follower_when_blog_created(instance, created,  *args, *
             )
 
 
-@receiver(post_save, sender=Follow)
+@receiver(post_save, sender=Follow, weak=False)
 def send_notification_to_author_when_someone_follows(instance, created, *args, **kwargs):
     if created:
         Notification.objects.create(
@@ -28,7 +28,7 @@ def send_notification_to_author_when_someone_follows(instance, created, *args, *
             notification_type="Follow"
         )
 
-@receiver(m2m_changed, sender=Blog.like.through)
+@receiver(m2m_changed, sender=Blog.like.through, weak=False)
 def send_notification_to_author_when_someone_likes_blog(instance, pk_set, action, *args, **kwargs):
     if action == "post_add":
         Notification.objects.create(
@@ -38,7 +38,7 @@ def send_notification_to_author_when_someone_likes_blog(instance, pk_set, action
             notification_type="Like"
         )
 
-@receiver(post_save, sender=Comment)
+@receiver(post_save, sender=Comment, weak=False)
 def send_notification_to_author_when_someone_comments(instance, created, *args, **kwargs):
     if created:
         Notification.objects.create(
@@ -48,7 +48,7 @@ def send_notification_to_author_when_someone_comments(instance, created, *args, 
             notification_type="Comment"
         )
 
-@receiver(post_save, sender=Reply)
+@receiver(post_save, sender=Reply, weak=False)
 def send_notification_to_author_when_someone_comments(instance, created, *args, **kwargs):
     if created:
         Notification.objects.create(
