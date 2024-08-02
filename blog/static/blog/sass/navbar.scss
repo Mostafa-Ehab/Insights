@@ -36,6 +36,63 @@ header {
         }
 
         .navbar-nav {
+            #notifications-button {
+                position: relative;
+
+                .notifications-number {
+                    position: absolute;
+                    top: -8px;
+                    right: -7px;
+                    background-color: var(--sec-color);
+                    color: var(--bg-color);
+                }
+            }
+
+            .notifications-list {
+                max-width: 400px;
+                box-shadow: 0 0 5px -2px var(--sec-color);
+                border-radius: 10px;
+                padding-bottom: 0;
+
+                h4 {
+                    padding: 0 10px 5px;
+                    box-shadow: 0 1px 1px rgba(0, 0, 0.2);
+                    margin-bottom: 2px;
+                }
+
+                li.dropdown-item {
+                    margin-bottom: 2px;
+                }
+
+                .dropdown-item:active {
+                    background-color: transparent;
+                }
+
+                .new-notification {
+                    background-color: rgba(0, 0, 0, 0.05);
+                }
+
+                .author-thumb {
+                    display: inline;
+                    float: left;
+
+                    img {
+                        width: 50px;
+                        display: inline;
+                        border-radius: 50%;
+                    }
+                }
+
+                .right-content {
+                    margin-left: 60px;
+
+                    p {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+            }
+
             a.nav-link {
                 text-transform: capitalize;
                 font-size: 15px;

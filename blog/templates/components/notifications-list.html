@@ -1,0 +1,37 @@
+<div class="btn-group">
+    <button class="btn btn-sec-outline" type="button" id="notifications-button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="fa-regular fa-bell"></i>
+        {% if unseen_num %}
+        <span class="badge badge-pill notifications-number">{{ unseen_num }}</span>
+        {% endif %}
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right notifications-list" aria-labelledby="notifications-button">
+        <h4>Notifications: </h4>
+        {% for notification in notifications|slice:5 %}
+        <li class="dropdown-item {% if not notification.is_seen %} new-notification {% endif %} ">
+            <a href="{% url 'open_notification' notification_id=notification.pk %}">
+                <div class="author-thumb">
+                    <img src="{{ notification.creator.profile_image.url }}" alt="">
+                </div>
+                <div class="right-content">
+                    <p> {{ notification.text }} </p>
+                    <p> {{ notification.formatted_date }} </p>
+                </div>
+            </a>
+        </li>
+        {% empty %}
+        <li class="dropdown-item">
+            <p class="text-center">
+                You don't have notifications right now 😭.
+            </p>
+        </li>
+        {% endfor %}
+
+        {% if notifications %}
+        <li class="dropdown-item">
+            <a href="{% url 'all_notifications' %}" class="d-block text-center">See all</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>

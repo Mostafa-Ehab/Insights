@@ -9,6 +9,7 @@ from django.contrib import messages
 
 from .models import Blog, Tag, Category, Comment, Reply
 from user_profile.models import Follow
+from notification.models import Notification
 from .forms import *
 
 # Create your views here.
@@ -192,7 +193,6 @@ def profile(request: HttpRequest):
                 return redirect(reverse("profile"))
             
         elif request.GET.get("action") == "image":
-            print(request.FILES)
             image_form = ProfileImageForm(request.POST, request.FILES)
             if image_form.is_valid():
                 profile_image = request.FILES["profile_image"]
@@ -305,6 +305,27 @@ def edit_post_view(request: HttpRequest, slug: str):
         "form": form,
         "post_tags": ",".join([tag.title for tag in blog.tags.all()]),
         "title": f"Insights | Edit: {blog.title}"
+    })
+
+@login_required(login_url="/login")
+def all_notifications(request: HttpRequest):
+    queryset = Notification.objects.filter(user=request.user).all().order_by("-created_date")
+
+    paginator = Paginator(queryset, 20)
+    page = request.GET.get("page", 1)
+
+    try:
+        notifications = paginator.page(page)
+    except EmptyPage:
+        notifications = paginator.page(1)
+    except PageNotAnInteger:
+        return redirect(reverse("all_notifications"))
+    except UnboundLocalError:
+        return redirect(reverse("all_notifications"))
+
+    return render(request, "pages/notifications.html", {
+        "notifications_list": notifications,
+        "title": "Insights | Notifications"
     })
 
 @login_required(login_url="/login")

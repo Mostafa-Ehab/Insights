@@ -1,0 +1,45 @@
+.notifications {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    padding-top: 15px;
+
+
+    h4 {
+        padding: 0 10px 5px;
+        margin-bottom: 2px;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    }
+
+    div.item {
+        margin-bottom: 2px;
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .new-notification {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .author-thumb {
+        display: inline;
+        float: left;
+
+        img {
+            width: 50px;
+            display: inline;
+            border-radius: 50%;
+        }
+    }
+
+    .right-content {
+        margin-left: 60px;
+
+        p {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    .page-numbers {
+        padding: 20px;
+    }
+}

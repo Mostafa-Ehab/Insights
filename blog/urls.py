@@ -19,7 +19,8 @@ urlpatterns = [
     path('add-post', add_post_view, name="add_post"),
     path('edit/<slug:slug>', edit_post_view, name="edit_post"),
     path('delete/<slug:slug>', delete_post, name="delete_post"),
-    path('about', about_us, name="about")
+    path('about', about_us, name="about"),
+    path('all-notifications', all_notifications, name="all_notifications"),
 ]
 
 handler404 = "blog.views.not_found"

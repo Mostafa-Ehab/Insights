@@ -716,6 +716,52 @@ header .navbar .navbar-brand h2 em {
   font-style: normal;
   color: var(--sec-color);
 }
+header .navbar .navbar-nav #notifications-button {
+  position: relative;
+}
+header .navbar .navbar-nav #notifications-button .notifications-number {
+  position: absolute;
+  top: -8px;
+  right: -7px;
+  background-color: var(--sec-color);
+  color: var(--bg-color);
+}
+header .navbar .navbar-nav .notifications-list {
+  max-width: 400px;
+  box-shadow: 0 0 5px -2px var(--sec-color);
+  border-radius: 10px;
+  padding-bottom: 0;
+}
+header .navbar .navbar-nav .notifications-list h4 {
+  padding: 0 10px 5px;
+  box-shadow: 0 1px 1px rgb(0, 0, 0);
+  margin-bottom: 2px;
+}
+header .navbar .navbar-nav .notifications-list li.dropdown-item {
+  margin-bottom: 2px;
+}
+header .navbar .navbar-nav .notifications-list .dropdown-item:active {
+  background-color: transparent;
+}
+header .navbar .navbar-nav .notifications-list .new-notification {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+header .navbar .navbar-nav .notifications-list .author-thumb {
+  display: inline;
+  float: left;
+}
+header .navbar .navbar-nav .notifications-list .author-thumb img {
+  width: 50px;
+  display: inline;
+  border-radius: 50%;
+}
+header .navbar .navbar-nav .notifications-list .right-content {
+  margin-left: 60px;
+}
+header .navbar .navbar-nav .notifications-list .right-content p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 header .navbar .navbar-nav a.nav-link {
   text-transform: capitalize;
   font-size: 15px;
@@ -773,6 +819,43 @@ header .navbar .navbar-nav .show > .nav-link {
   font-size: 18px;
   line-height: 30px;
   font-family: "FontAwesome";
+}
+
+.notifications {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  padding-top: 15px;
+}
+.notifications h4 {
+  padding: 0 10px 5px;
+  margin-bottom: 2px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+.notifications div.item {
+  margin-bottom: 2px;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.notifications .new-notification {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.notifications .author-thumb {
+  display: inline;
+  float: left;
+}
+.notifications .author-thumb img {
+  width: 50px;
+  display: inline;
+  border-radius: 50%;
+}
+.notifications .right-content {
+  margin-left: 60px;
+}
+.notifications .right-content p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.notifications .page-numbers {
+  padding: 20px;
 }
 
 @media (max-width: 1250px) {

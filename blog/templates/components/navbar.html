@@ -29,13 +29,17 @@
                         </form>
                     </li>
                     <li class="nav-item">
+                        {% include 'components/notifications-list.html' %}
+                    </li>
+                    <li class="nav-item">
                         {% if user.is_authenticated %}
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sec-outline dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-sec-outline dropdown-toggle" id="profile-menu"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Profile
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right">
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile-menu">
                                 <a class="dropdown-item" href="{% url 'profile' %}">My profile</a>
                                 <a class="dropdown-item" href="{% url 'my_blogs' %}">My blogs</a>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>

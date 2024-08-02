@@ -24,7 +24,8 @@ admin.site.site_header = 'Insights'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("blog.urls")),
-    path("", include("user_profile.urls"))
+    path("", include("user_profile.urls")),
+    path("notification/", include("notification.urls")),
 ]
 
 handler404 = "blog.views.not_found"
