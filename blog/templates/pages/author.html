@@ -35,10 +35,10 @@
                     {% if user.is_authenticated %}
                     <form method="post" action="{% url 'follow' user_id=author.pk %}">
                         {% csrf_token %}
-                        {% if auther in user.user_followed %}
-                        <button type="submit" id="form-submit" class="btn btn-sec">Follow</button>
-                        {% else %}
+                        {% if following %}
                         <button type="submit" id="form-submit" class="btn btn-sec-outline">Following</button>
+                        {% else %}
+                        <button type="submit" id="form-submit" class="btn btn-sec">Follow</button>
                         {% endif %}
                     </form>
                     {% else %}
