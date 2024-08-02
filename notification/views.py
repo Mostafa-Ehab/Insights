@@ -17,7 +17,12 @@ def notification_redirect(request: HttpRequest, notification_id: int):
             
             elif notification.notification_type in ["Blog", "Like"]:
                 return redirect(reverse("post", kwargs={"slug": notification.content_object.slug}))
+
+            elif notification.notification_type == "Comment":
+                return redirect(reverse("post", kwargs={"slug": notification.content_object.blog.slug})) 
             
+            elif notification.notification_type == "Reply":
+                return redirect(reverse("post", kwargs={"slug": notification.content_object.comment.blog.slug}))
             return redirect("/")
         else:
             return HttpResponseForbidden()

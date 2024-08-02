@@ -7,7 +7,7 @@ from utils import datetime_format
 
 # Create your models here.
 class Notification(models.Model):
-    NOTIFICATION_TYPE = ("Blog", "Follow", "Like")
+    NOTIFICATION_TYPE = ("Blog", "Follow", "Like", "Comment", "Reply")
 
     content_type = models.ForeignKey(
         ContentType,
@@ -45,6 +45,12 @@ class Notification(models.Model):
         
         elif self.notification_type == "Like":
             return f"{self.creator.username} liked your blog"
+        
+        elif self.notification_type == "Comment":
+            return f"{self.creator.username} commented on your blog"
+        
+        elif self.notification_type == "Reply":
+            return f"You have a new reply from {self.creator.username}"
 
     def formatted_date(self):
         return datetime_format(self.created_date)

@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed
 
-from .models import Blog
+from .models import Blog, Comment, Reply
 from user_profile.models import Follow, User
 from notification.models import Notification
 
@@ -38,3 +38,22 @@ def send_notification_to_author_when_someone_likes_blog(instance, pk_set, action
             notification_type="Like"
         )
 
+@receiver(post_save, sender=Comment)
+def send_notification_to_author_when_someone_comments(instance, created, *args, **kwargs):
+    if created:
+        Notification.objects.create(
+            content_object=instance,
+            user=instance.blog.author,
+            creator=instance.user,
+            notification_type="Comment"
+        )
+
+@receiver(post_save, sender=Reply)
+def send_notification_to_author_when_someone_comments(instance, created, *args, **kwargs):
+    if created:
+        Notification.objects.create(
+            content_object=instance,
+            user=instance.comment.user,
+            creator=instance.user,
+            notification_type="Reply"
+        )
