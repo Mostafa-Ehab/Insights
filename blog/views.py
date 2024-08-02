@@ -160,7 +160,7 @@ def author_profile(request: HttpRequest, slug: str):
 
     return render(request, "pages/author.html", {
         "author": author,
-        "following": author in [user.followed for user in request.user.user_followed.all()],
+        "following": author in [user.followed for user in request.user.user_followed.all()] if request.user.is_authenticated else None,
         "title": f"Insights | {author.username}"
     })
 

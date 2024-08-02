@@ -16,9 +16,16 @@
                             <h4>{{ blog.title }}</h4>
                         </a>
                         <ul class="post-info">
-                            <li><a href="#">{{ blog.author }}</a></li>
-                            <li><a href="#">{{ blog.formatted_date }}</a></li>
-                            <li><a href="#">{{ blog.blog_comments.all.count }} Comments</a></li>
+                            <li>
+                                <a href="{% url 'author' slug=blog.author.slug %}">{{ blog.author }}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'post' slug=blog.slug %}">{{ blog.formatted_date }}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'post' slug=blog.slug %}">{{ blog.blog_comments.all.count }}
+                                    Comments</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

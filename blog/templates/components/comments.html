@@ -43,7 +43,7 @@
                                             Submit
                                         </button>
                                         {% else %}
-                                        <a href="#" class="link link-primary">
+                                        <a href="{% url 'login' %}" class="link link-primary">
                                             Login to reply
                                         </a>
                                         {% endif %}
@@ -82,7 +82,7 @@
                             {% if user.is_authenticated %}
                             <button type="submit" id="form-submit" class="btn btn-sec">Submit</button>
                             {% else %}
-                            <a href="#" class="link link-primary">Login to comment</a>
+                            <a href="{% url 'login' %}" class="link link-primary">Login to comment</a>
                             {% endif %}
                         </fieldset>
                     </div>
