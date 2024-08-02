@@ -8,7 +8,9 @@ def user_notifications(request: HttpRequest):
         ).order_by("-created_date")
         unseen = notifications.exclude(is_seen=True).count()
 
-    return {
-        "notifications": notifications,
-        "unseen_num": unseen
-    }
+        return {
+            "notifications": notifications,
+            "unseen_num": unseen
+        }
+    
+    return {}
