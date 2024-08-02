@@ -28,9 +28,11 @@
                             </div>
                         </form>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         {% include 'components/notifications-list.html' %}
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         {% if user.is_authenticated %}
                         <div class="btn-group">
