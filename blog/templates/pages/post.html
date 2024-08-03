@@ -89,7 +89,7 @@
                                                 <li class="post-share">
                                                     <i class="fa fa-share-alt"></i>
                                                 </li>
-                                                {% if user.is_authenticated %}
+                                                {% if user.is_authenticated and user == post.author %}
                                                 <li class="post-share">
                                                     <a href="{% url 'edit_post' slug=post.slug %}">
                                                         <i class=" fa-solid fa-pen-to-square"></i>
