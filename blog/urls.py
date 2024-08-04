@@ -1,6 +1,8 @@
 from django.urls import path
+from django.contrib.sitemaps.views import sitemap
 
 from .views import *
+from .sitemap import sitemaps
 
 urlpatterns = [
     path('', home, name="home"),
@@ -21,6 +23,7 @@ urlpatterns = [
     path('delete/<slug:slug>', delete_post, name="delete_post"),
     path('about', about_us, name="about"),
     path('all-notifications', all_notifications, name="all_notifications"),
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",),
 ]
 
 handler404 = "blog.views.not_found"
