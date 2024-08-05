@@ -4,9 +4,16 @@ from django.urls import reverse
 from .models import Blog, Category, Tag
 from user_profile.models import User
 
+class Site:
+    domain = "insights.mostafa-ehab.com"
+    name = "insights.mostafa-ehab.com"
+
 class BlogSitemap(Sitemap):
     changefreq = "never"
     priority = 0.8
+
+    def get_urls(self, site=None, **kwargs):
+        return super(BlogSitemap, self).get_urls(site=Site(), **kwargs)
 
     def items(self):
         return Blog.objects.order_by("-id")
@@ -22,6 +29,9 @@ class CategorySiteMap(Sitemap):
     changefreq = "weekly"
     priority = 0.5
 
+    def get_urls(self, site=None, **kwargs):
+        return super(CategorySiteMap, self).get_urls(site=Site(), **kwargs)
+
     def items(self):
         return Category.objects.order_by("-id")
     
@@ -32,6 +42,9 @@ class CategorySiteMap(Sitemap):
 class TagSiteMap(Sitemap):
     changefreq = "weekly"
     priority = 0.5
+
+    def get_urls(self, site=None, **kwargs):
+        return super(TagSiteMap, self).get_urls(site=Site(), **kwargs)
 
     def items(self):
         return Tag.objects.order_by("-id")
@@ -44,6 +57,9 @@ class AuthorSiteMap(Sitemap):
     changefreq = "weekly"
     priority = 0.5
 
+    def get_urls(self, site=None, **kwargs):
+        return super(AuthorSiteMap, self).get_urls(site=Site(), **kwargs)
+
     def items(self):
         return User.objects.exclude(author_blogs=None).order_by("-id")
     
@@ -55,6 +71,9 @@ class HomePageSiteMap(Sitemap):
     priority = 0.9
     changefreq = "daily"
 
+    def get_urls(self, site=None, **kwargs):
+        return super(HomePageSiteMap, self).get_urls(site=Site(), **kwargs)
+
     def items(self):
         return ["home", "blogs"]
 
@@ -65,6 +84,9 @@ class HomePageSiteMap(Sitemap):
 class StaticPageSiteMap(Sitemap):
     priority = 0.3
     changefreq = "monthly"
+
+    def get_urls(self, site=None, **kwargs):
+        return super(StaticPageSiteMap, self).get_urls(site=Site(), **kwargs)
 
     def items(self):
         return ["about"]
